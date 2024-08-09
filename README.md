@@ -6,12 +6,12 @@ The idea here is to show how to implement a headless execution of Knime Analytic
 
 A headless execution of Knime is the name given to a Knime execution by command line:
 - no graphic interface is opened
-  - in standard pressure and temperature conditions, that is, without the occurrence of errors, no graphic interface of Knime is opened. If an error occurs, an screen is opened and you can read the Matrix (see mode detais [here](#reading-the-matrix)).
-- there is no a complete control of error messages, but you can generate logs of these errors
+  - in standard pressure and temperature conditions, that is, without the occurrence of errors, no graphic interface of Knime is opened. If an error occurs, an screen is opened and you can read the Matrix (see mode details [here](#reading-the-matrix)).
+- there is no a complete control of error messages, but you can generate logs of errors
 - it doesn't work fine when workflow or arguments paths have spaces
 - security (user accounts and groups) is managed by OS
 - not recommended by Knime company
-  - but, in my experience, it work fine even in production environment ! See an example of implementation [here](#an-implementation-example-in-production)
+  - but, in my experience, it works fine even in production environment ! See an example of implementation [here](#an-implementation-example-in-production)
 
 You can read a complete and excellent article of headless execution of Knime, wrote by Marcus Lauber in this [link](https://medium.com/low-code-for-advanced-data-science/knime-batch-processing-on-windows-and-macos-caacde067bd0).
 
@@ -100,7 +100,7 @@ Now its time to check the workflow execution's log:
  <img alt="Error screen" src="images/image5.png">
 </picture>
 
-And, yes, it is clear what is the problem: there is no a directory (workflow, when thinking about Knime) `C:\APP\knime_workspace\TEST-here_is_an_error``.
+And, yes, it is clear what is the problem: there is no a directory (workflow, when thinking about Knime) `C:\APP\knime_workspace\TEST-here_is_an_error`.
 
 ## An implementation example in production
 
@@ -135,6 +135,8 @@ The `knime` script hides the complexity of headless execution of Knime:
 [psoft@rundeck ~]$ cat knime
 /u01/app/knime_4.4.0/knime -nosplash -nosave -reset -application org.knime.product.KNIME_BATCH_APPLICATION -workflowDir=$1 -workflow.variable=$2 -preferences=/u01/app/knime_4.4.0/preferences440.epf
 ```
+
+Note that `-workflowDir=$1 -workflow.variable=$2` receives both the arguments sent to `knime` script.
 
 ## Final remarks
 
